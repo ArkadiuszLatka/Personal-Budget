@@ -63,15 +63,7 @@ bool UserManager:: loginExists( string login)
     return false;
 
 }
-/*void UserManager:: wypiszWszystkichUzytkownikow()
-{
-    for (int i =0;i<users.size();i++)
-    {
-       cout << users[i].getId() <<endl;
-       cout << users[i].getLogin() <<endl;
-       cout << users[i].getPassword() <<endl;
-    }
-}*/
+
 void UserManager::loadUsersFromFile() {
     users = usersFile.loadUsersFromFile();
 }
@@ -130,7 +122,7 @@ void UserManager::changeLoggedUserPassword()
             system("pause");
         }
     }
-    //users.changePasswordInFile(users);
+    usersFile.addAllUsersToFile(users);
 }
 bool UserManager::isUserLogged()
 {
@@ -143,7 +135,7 @@ int UserManager::getLoggedUserId()
 {
     return loggedUserId;
 }
-void UserManager::setLoggedUserId(int number)
-{
-    loggedUserId = number;
-}
+//void UserManager::setLoggedUserId(int number)
+//{//
+    //loggedUserId = number;
+//}
