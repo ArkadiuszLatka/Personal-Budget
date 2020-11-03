@@ -15,6 +15,22 @@ void UsersFile::addUserToFile(User user) {
     xml.OutOfElem();
     xml.Save(USERS_FILENAME);
 }
+void UsersFile::addAllUsersToFile(vector <User> &users) {
+    CMarkup xml;
+    xml.AddElem( "USER" );
+    xml.IntoElem();
+    xml.FindElem();
+    xml.IntoElem();
+    vector <User>::iterator itrEnd = --users.end();
+    for (vector <User>::iterator itr = users.begin(); itr != users.end(); itr++) {
+        xml.AddElem( "ID", itr ->getId() );
+        xml.AddElem( "LOGIN", itr ->getLogin() );
+        xml.AddElem( "PASSWORD",itr ->getPassword() );
+        xml.AddElem( "NAME", itr ->getName() );
+        xml.AddElem( "SURNAME", itr ->getSurname() );
+        xml.Save(USERS_FILENAME );
+    }
+}
 vector<User> UsersFile::loadUsersFromFile() {
     vector<User> users;
     CMarkup xml;
@@ -36,18 +52,4 @@ vector<User> UsersFile::loadUsersFromFile() {
         users.push_back(user);
     }
     return users;
-}
-void UsersFile::changePasswordInFile (User loggedUser) {
-    CMarkup xml;
-    xml.Load(USERS_FILENAME);
-    xml.ResetPos();
-    while ( xml.FindElem("USER") ) {
-        xml.FindChildElem( "ID" );
-        if ( atoi( MCD_2PCSZ(xml.GetChildData())) == loggedUser.getId() ) {
-            xml.FindChildElem( "PASSWORD" );
-            xml.SetChildData( loggedUser.getPassword() );
-            break;
-        }
-    }
-    xml.Save(USERS_FILENAME);
 }
