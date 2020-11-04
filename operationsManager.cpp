@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 void operationsManager::addIncome() {
     char choice;
     income Income;
@@ -30,7 +29,7 @@ void operationsManager::addIncome() {
     {
         cout<< "Nie ma takiej opcji. Wybierz jeszcze raz.";
     }
-    Income.setIncomeId(incomeFiles.getNewTransactionId(incomes) + 1);
+    Income.setIncomeId(getNewTransactionId(incomes) );
 
     Income.setUserId(loggedInUserId);
 
@@ -48,7 +47,12 @@ void operationsManager::addIncome() {
 
 
 }
-
+int operationsManager::getNewTransactionId(vector <income> incomes) {
+    if (incomes.empty() == true)
+        return 1;
+    else
+        return incomes.back().getIncomeId() + 1;
+}
 void operationsManager::addExpense() {
     char choice;
     income expense;
@@ -75,7 +79,7 @@ void operationsManager::addExpense() {
     {
         cout<< "Nie ma takiej opcji. Wybierz jeszcze raz.";
     }
-    expense.setIncomeId(incomeFiles.getNewTransactionId(expenses) + 1);
+    expense.setIncomeId(getNewTransactionId(expenses) );
 
     expense.setUserId(loggedInUserId);
 
@@ -89,7 +93,7 @@ void operationsManager::addExpense() {
     expense.setAmount(AuxiliaryMethods::getMoneyAmountFromUser());
 
     expenses.push_back(expense);
-    expenseFiles.addIncomeToFile(expense);
+    expenseFiles.addExpenseToFile(expense);
 
 
 }

@@ -24,6 +24,7 @@ class operationsManager {
     IncomeFiles expenseFiles;
     int getCurrentDate();
     int getUserDate();
+    int getNewTransactionId(vector <income> incomes);
 
 
 public:
