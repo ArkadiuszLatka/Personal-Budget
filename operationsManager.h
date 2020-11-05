@@ -18,23 +18,23 @@
 class operationsManager {
 
     const  int loggedInUserId;;
-    vector <income> incomes;
-    vector <income> expenses;
+    vector <Income> incomes;
+    vector <Income> expenses;
     IncomeFiles incomeFiles;
     IncomeFiles expenseFiles;
     int getCurrentDate();
     int getUserDate();
-    int getNewTransactionId(vector <income> incomes);
+    int getNewTransactionId(vector <Income> incomes);
 
 
 public:
-    operationsManager (string IncomeFileName,string ExpenseFileName,int LOGGEDINUSERID):incomeFiles(IncomeFileName),
-    expenseFiles(ExpenseFileName),loggedInUserId(LOGGEDINUSERID) {
+   operationsManager (string incomeFileName,string expenseFileName,int LOGGEDINUSERID):incomeFiles(incomeFileName),
+    expenseFiles(expenseFileName),loggedInUserId(LOGGEDINUSERID) {
         incomes = incomeFiles.loadIncomeFromFile(loggedInUserId);
-        expenses = expenseFiles.loadIncomeFromFile(loggedInUserId);
+        expenses = expenseFiles.loadExpenseFromFile(loggedInUserId);
 
     };
-
+    void loadIncomeFromFile();
     void addIncome();
     void addExpense();
 

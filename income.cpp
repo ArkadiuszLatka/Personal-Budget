@@ -1,41 +1,41 @@
 #include "income.h"
 
-void income::setIncomeId(int newIncomeId) {
+void Income::setIncomeId(int newIncomeId) {
     if (newIncomeId >= 0)
         incomeId = newIncomeId;
 }
 
-void income::setUserId(int newUserId) {
+void Income::setUserId(int newUserId) {
     userId = newUserId;
 }
 
-void income::setItem(string newItem) {
+void Income::setItem(string newItem) {
     item = newItem;
 }
-void income::setAmount(double newAmount)
+void Income::setAmount(double newAmount)
 {
     if(newAmount<0)
         newAmount*=(-1);
     amount = newAmount;
 }
 
-int income::getIncomeId() {
+int Income::getIncomeId() {
     return incomeId;
 }
 
-int income::getUserId() {
+int Income::getUserId() {
     return userId;
 }
-int income::getDate() {
+int Income::getDate() {
     return date;
 }
-string income::getItem() {
+string Income::getItem() {
     return item;
 }
-double income::getAmount() {
+double Income::getAmount() {
     return amount;
 }
-void income::setDate(int newDate) {
+void Income::setDate(int newDate) {
     date = newDate;
     stringDate = AuxiliaryMethods::intToString(date);
     stringDate.insert(6,"-");

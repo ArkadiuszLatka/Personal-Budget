@@ -5,7 +5,7 @@ using namespace std;
 
 void operationsManager::addIncome() {
     char choice;
-    income Income;
+    Income income;
     string incomeName;
 
 
@@ -16,38 +16,39 @@ void operationsManager::addIncome() {
     choice = AuxiliaryMethods::loadCharacter();
     if (choice == '1')
     {
-        Income.setDate(operationsOnDate::getCurrentDate());
+        income.setDate(operationsOnDate::getCurrentDate());
 
     }
     else if (choice == '2')
     {
         cout<<"Wprowadz date uzyskania przychodu w formacie rrrr-mm-dd: ";
 
-        Income.setDate(operationsOnDate::getUserDate());
+        income.setDate(operationsOnDate::getUserDate());
     }
     else
     {
         cout<< "Nie ma takiej opcji. Wybierz jeszcze raz.";
     }
-    Income.setIncomeId(getNewTransactionId(incomes) );
+    income.setIncomeId(getNewTransactionId(incomes) );
 
-    Income.setUserId(loggedInUserId);
+    income.setUserId(loggedInUserId);
 
     cout << "Wprowadz rodzaj uzyskanego przychodu: "<<endl;
     incomeName =AuxiliaryMethods::loadLine();
-    Income.setItem(incomeName);
+    income.setItem(incomeName);
 
 
 
     cout<<"Wprowadz wysokosc przychodu: ";
-    Income.setAmount(AuxiliaryMethods::getMoneyAmountFromUser());
+    income.setAmount(AuxiliaryMethods::getMoneyAmountFromUser());
 
-    incomes.push_back(Income);
-    incomeFiles.addIncomeToFile(Income);
+    incomes.push_back(income);
+    incomeFiles.addIncomeToFile(income);
 
 
 }
-int operationsManager::getNewTransactionId(vector <income> incomes) {
+
+int operationsManager::getNewTransactionId(vector <Income> incomes) {
     if (incomes.empty() == true)
         return 1;
     else
@@ -55,7 +56,7 @@ int operationsManager::getNewTransactionId(vector <income> incomes) {
 }
 void operationsManager::addExpense() {
     char choice;
-    income expense;
+    Income expense;
     string exspenseName;
 
 

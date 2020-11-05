@@ -11,19 +11,20 @@ using namespace std;
 
 class IncomeFiles {
 
-    income Income;
-    vector<income>incomes;
-    const string IncomeFileName;
+    Income income;
+    vector<Income>incomes;
+    const string incomeFileName;
 
 
 public:
 
-    IncomeFiles (string INCOMEFILENAME):IncomeFileName(INCOMEFILENAME)
+    IncomeFiles (string INCOMEFILENAME):incomeFileName(INCOMEFILENAME)
     { };
 
-    vector<income> loadIncomeFromFile( int loggedInUserId);
-    void addIncomeToFile(income Income);
-    void addExpenseToFile (income Income);
+    vector<Income> loadIncomeFromFile( int loggedInUserId);
+    vector<Income> loadExpenseFromFile( int loggedInUserId);
+    void addIncomeToFile(Income income);
+    void addExpenseToFile (Income income);
 
 
 

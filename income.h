@@ -6,7 +6,7 @@
 #include "operationsOnDate.h"
 
 
-class income {
+class Income {
     int incomeId;
     int userId;
     int date;;
