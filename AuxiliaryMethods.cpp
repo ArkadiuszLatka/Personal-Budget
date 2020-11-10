@@ -149,11 +149,11 @@ float AuxiliaryMethods::getMoneyAmountFromUser()
         }
         i++;
     }
-    amount = setPrecisionToMoney(stringToFloat(strAmount));
+    amount = setPrecisionToMoney(stringToDouble(strAmount));
 
     return amount;
 }
-float AuxiliaryMethods::setPrecisionToMoney(float amount)
+double AuxiliaryMethods::setPrecisionToMoney(double amount)
 {
     stringstream myStream;
     myStream << std::fixed << std::setprecision(2) << amount;
@@ -165,4 +165,32 @@ string AuxiliaryMethods::convertIntDateToString(int date) {
     stringDate.insert(6,"-");
     stringDate.insert(4,"-");
     return stringDate;
+}
+double AuxiliaryMethods::conversionFromStringToDouble(string strAmount)
+{
+
+    if(strAmount.length() == 0)
+    {
+        strAmount = "0";
+    }
+    for(int i = 0; i <= strAmount.length()-1; i++)
+    {
+        if(strAmount[i] == ',')
+            strAmount[i] = '.';
+        if(strAmount[i] == ' ')
+            strAmount.replace(i,1,"");
+    }
+    double numberDouble;
+    istringstream iss(strAmount);
+    iss >> numberDouble;
+
+    return numberDouble;
+}
+string AuxiliaryMethods::conversionFromDoubleToString(double number)
+{
+    ostringstream ss;
+    ss.precision(15);
+    ss << number;
+    string str = ss.str();
+    return str;
 }

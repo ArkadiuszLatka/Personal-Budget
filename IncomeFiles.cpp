@@ -73,7 +73,7 @@ void IncomeFiles::addIncomeToFile (Income income) {
         xml.AddElem( "USERID", income.getUserId() );
         xml.AddElem( "DATE", AuxiliaryMethods::convertDateToString(income.getDate()));
         xml.AddElem( "ITEM", income.getItem() );
-        xml.AddElem( "AMOUNT", income.getAmount() );
+        xml.AddElem( "AMOUNT",AuxiliaryMethods::conversionFromDoubleToString( income.getAmount()) );
     }
 
     xml.OutOfElem();
@@ -92,7 +92,7 @@ void IncomeFiles::addExpenseToFile (Income income) {
         xml.AddElem( "USERID", income.getUserId() );
         xml.AddElem( "DATE", AuxiliaryMethods::convertDateToString(income.getDate()));
         xml.AddElem( "ITEM", income.getItem() );
-        xml.AddElem( "AMOUNT", income.getAmount() );
+        xml.AddElem( "AMOUNT",AuxiliaryMethods::conversionFromDoubleToString( income.getAmount()) );
     }
 
     xml.OutOfElem();

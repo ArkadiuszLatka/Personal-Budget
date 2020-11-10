@@ -6,7 +6,8 @@ using namespace std;
 void operationsManager::addIncome() {
     char choice;
     Income income;
-    string incomeName;
+    string incomeName, amount;
+
 
 
     cout<<"DODAJ PRZYCHOD\n\n";
@@ -40,7 +41,8 @@ void operationsManager::addIncome() {
 
 
     cout<<"Wprowadz wysokosc przychodu: ";
-    income.setAmount(AuxiliaryMethods::getMoneyAmountFromUser());
+    amount =AuxiliaryMethods::loadLine();
+    income.setAmount(AuxiliaryMethods::conversionFromStringToDouble(amount));
 
     incomes.push_back(income);
     incomeFiles.addIncomeToFile(income);
@@ -57,7 +59,7 @@ int operationsManager::getNewTransactionId(vector <Income> incomes) {
 void operationsManager::addExpense() {
     char choice;
     Income expense;
-    string exspenseName;
+    string exspenseName,amount;
 
 
     cout<<"DODAJ WYDATEK\n\n";
@@ -91,7 +93,8 @@ void operationsManager::addExpense() {
 
 
     cout<<"Wprowadz wysokosc wydatku: ";
-    expense.setAmount(AuxiliaryMethods::getMoneyAmountFromUser());
+    amount =AuxiliaryMethods::loadLine();
+    expense.setAmount(AuxiliaryMethods::conversionFromStringToDouble(amount));
 
     expenses.push_back(expense);
     expenseFiles.addExpenseToFile(expense);

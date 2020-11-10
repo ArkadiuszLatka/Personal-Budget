@@ -30,9 +30,10 @@ public:
     static string convertDateToString(int date);
     static int convertDateToInt(string date);
     static float getMoneyAmountFromUser();
-    static float setPrecisionToMoney(float amount);
+    static double setPrecisionToMoney(double amount);
     static string convertIntDateToString(int date);
-
+    static double conversionFromStringToDouble(string strAmount);
+    static string conversionFromDoubleToString(double number);
 };
 
 
