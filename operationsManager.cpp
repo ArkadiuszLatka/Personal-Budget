@@ -104,19 +104,25 @@ void operationsManager::addExpense()
 
 
 }
+
+void operationsManager::sortTransactions(vector<Income> &incomes,vector<Income> &expenses) {
+    sort(incomes.begin(), incomes.end());
+    sort(expenses.begin(), expenses.end());
+}
 void operationsManager::showCurrentMonthBalance()
 {
     int incomesNumber =0;
     int expenseNumber =0;
     double incomeSum = 0;
     double expenseSum = 0;
-    double mouthBalance =0;
-
+    double mouthBalance = 0;
+    //sortTransactions(incomes,expenses);
 
     int beginningDate = operationsOnDate::getBeginningOfMonth();
-    cout <<beginningDate<<endl;
+    cout <<AuxiliaryMethods::convertDateToString(beginningDate)<<endl;
     int endingDate = operationsOnDate::getEndOfMonth();
-    cout <<endingDate<<endl;
+    cout <<AuxiliaryMethods::convertDateToString(endingDate)<<endl;
+
     if (!incomes.empty())
     {
 
@@ -129,9 +135,10 @@ void operationsManager::showCurrentMonthBalance()
 
         for (vector<Income>::iterator itr=incomes.begin(); itr!=incomes.end(); itr++)
         {
+
             if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
             {
-                cout << endl << "IncomeID:             " << itr ->getIncomeId() << endl;
+                cout << endl << "IncomeID: " << itr ->getIncomeId() << endl;
                 cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
                 cout << "Item:             " <<itr ->getItem() << endl;
                 cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
@@ -155,7 +162,8 @@ void operationsManager::showCurrentMonthBalance()
         {
             if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
             {
-                cout << endl << "IncomeID:             " << itr ->getIncomeId() << endl;
+                 sort(incomes.begin(), incomes.end());
+                cout << endl << "IncomeID: " << itr ->getIncomeId() << endl;
                 cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
                 cout << "Item:             " <<itr ->getItem() << endl;
                 cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
@@ -167,9 +175,154 @@ void operationsManager::showCurrentMonthBalance()
         }
         cout<<">>>>MIESIECZNY BILANS PRZYCHODOW I WYDATKOW<<<< "<<endl;
         mouthBalance = incomeSum - expenseSum;
-        cout<<"SUMA PRZYCHODOW   "<<incomeSum<<"  zl"<<endl;
-        cout<<"SUMA WYDATKOW     "<<expenseSum<<"  zl"<<endl;
-        cout<<"BILANS            "<<mouthBalance<<"  zl"<<endl;
+        cout<<"SUMA PRZYCHODOW   "<<incomeSum<<" zl"<<endl;
+        cout<<"SUMA WYDATKOW     "<<expenseSum<<" zl"<<endl;
+        cout<<"BILANS            "<<mouthBalance<<" zl"<<endl;
+
+
+    }
+    system("pause");
+}
+void operationsManager::showLastMonthBalance()
+{
+    int incomesNumber =0;
+    int expenseNumber =0;
+    double incomeSum = 0;
+    double expenseSum = 0;
+    double mouthBalance =0;
+
+
+    int beginningDate = operationsOnDate::getBeginningOfLastMonth();
+    cout <<AuxiliaryMethods::convertDateToString(beginningDate)<<endl;
+    int endingDate = operationsOnDate::getEndOfLastMonth();
+    cout <<AuxiliaryMethods::convertDateToString(endingDate)<<endl;
+    if (!incomes.empty())
+    {
+
+
+        incomes.begin(), incomes.end(),greater<Income>();
+
+
+        cout<<"\nPRZYCHODY W POPRZEDNIM MIESIACU:\n\n";
+
+
+        for (vector<Income>::iterator itr=incomes.begin(); itr!=incomes.end(); itr++)
+        {
+            if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
+            {
+                cout << endl << "IncomeID: " << itr ->getIncomeId() << endl;
+                cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
+                cout << "Item:             " <<itr ->getItem() << endl;
+                cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
+                cout << "------------------------" << endl;
+                AuxiliaryMethods::conversionFromDoubleToString(incomeSum +=  itr->getAmount());
+
+            }
+
+        }
+
+        cout<<endl;
+    }
+
+    if (!expenses.empty())
+    {
+
+        cout<<"\nWYDATKI W POPRZEDNIM MIESIACU:\n\n";
+
+
+        for (vector<Income>::iterator itr=expenses.begin(); itr!=expenses.end(); itr++)
+        {
+            if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
+            {
+                cout << endl << "IncomeID: " << itr ->getIncomeId() << endl;
+                cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
+                cout << "Item:             " <<itr ->getItem() << endl;
+                cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
+                cout << "------------------------" << endl;
+                AuxiliaryMethods::conversionFromDoubleToString(expenseSum +=  itr->getAmount());
+                expenseNumber++;
+            }
+
+        }
+        cout<<">>>> BILANS PRZYCHODOW I WYDATKOW<<<< "<<endl;
+        mouthBalance = incomeSum - expenseSum;
+        cout<<"SUMA PRZYCHODOW   "<<incomeSum<<" zl"<<endl;
+        cout<<"SUMA WYDATKOW     "<<expenseSum<<" zl"<<endl;
+        cout<<"BILANS            "<<mouthBalance<<" zl"<<endl;
+
+
+    }
+    system("pause");
+}
+void operationsManager::showSelectPeriodBalance()
+{
+    system("cls");
+    int incomesNumber =0;
+    int expenseNumber =0;
+    double incomeSum = 0;
+    double expenseSum = 0;
+    double mouthBalance =0;
+
+    cout<<"Podaj okres z jakiego chcesz otrzymac dane."<<endl;
+    cout<<"Data rozpoczynajaca okres w formacie rrrr-mm-dd: "<<endl;
+    int beginningDate = operationsOnDate::getUserDate();
+
+    cout<<"Data konczaca okres w formacie rrrr-mm-dd: ";
+    int endingDate = operationsOnDate::getUserDate();
+
+    if (!incomes.empty())
+    {
+
+
+        cout<<"\nPRZYCHODY W WYBRANYM OKRESIE :\n\n"<<endl;
+        cout<<"OD  "<<AuxiliaryMethods::convertDateToString(beginningDate)<<endl;
+        cout<<"DO  "<<AuxiliaryMethods::convertDateToString(endingDate)<<endl;
+
+
+        for (vector<Income>::iterator itr=incomes.begin(); itr!=incomes.end(); itr++)
+        {
+            if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
+            {
+                cout << endl << "IncomeID: " << itr ->getIncomeId() << endl;
+                cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
+                cout << "Item:             " <<itr ->getItem() << endl;
+                cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
+                cout << "------------------------" << endl;
+                AuxiliaryMethods::conversionFromDoubleToString(incomeSum +=  itr->getAmount());
+
+            }
+
+        }
+
+        cout<<endl;
+    }
+
+    if (!expenses.empty())
+    {
+
+        cout<<"\nWYDATKI W WYBRANYM OKRESIE:\n\n";
+        cout<<"OD  "<<AuxiliaryMethods::convertDateToString(beginningDate)<<endl;
+        cout<<"DO  "<<AuxiliaryMethods::convertDateToString(endingDate)<<endl;
+
+        for (vector<Income>::iterator itr=expenses.begin(); itr!=expenses.end(); itr++)
+        {
+            if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
+            {
+                cout << endl << "IncomeID: " << itr ->getIncomeId() << endl;
+                cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
+                cout << "Item:             " <<itr ->getItem() << endl;
+                cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
+                cout << "------------------------" << endl;
+                AuxiliaryMethods::conversionFromDoubleToString(expenseSum +=  itr->getAmount());
+                expenseNumber++;
+            }
+
+        }
+        cout<<">>>> BILANS PRZYCHODOW I WYDATKOW<<<< "<<endl;
+        mouthBalance = incomeSum - expenseSum;
+        cout<<"SUMA PRZYCHODOW   "<<incomeSum<<" zl"<<endl;
+        cout<<"SUMA WYDATKOW     "<<expenseSum<<" zl"<<endl;
+        cout<<"BILANS            "<<mouthBalance<<" zl"<<endl;
 
 
     }

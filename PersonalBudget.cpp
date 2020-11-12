@@ -57,6 +57,17 @@ void PersonalBudget::showCurrentMonthBalance()
         OperationsManager->showCurrentMonthBalance();
 
 }
+void PersonalBudget::showLastMonthBalance()
+{
 
+        OperationsManager->showLastMonthBalance();
+
+}
+void PersonalBudget::showSelectPeriodBalance()
+{
+
+        OperationsManager-> showSelectPeriodBalance();
+
+}
 
 

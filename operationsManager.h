@@ -25,6 +25,8 @@ class operationsManager {
     int getCurrentDate();
     int getUserDate();
     int getNewTransactionId(vector <Income> incomes);
+    void sortTransactions(vector<Income> &incomes,vector<Income> &expenses);
+
 
 
 public:
@@ -38,6 +40,8 @@ public:
     void addIncome();
     void addExpense();
     void showCurrentMonthBalance();
+    void showLastMonthBalance();
+    void showSelectPeriodBalance();
 
 
 

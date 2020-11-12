@@ -53,10 +53,10 @@ int main()
                 personalBudget.showCurrentMonthBalance();
                 break;
             case '4':
-                //ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+                personalBudget.showLastMonthBalance();
                 break;
             case '5':
-                //ksiazkaAdresowa.usunAdresata();
+                personalBudget.showSelectPeriodBalance();
                 break;
             case '6':
                 //ksiazkaAdresowa.edytujAdresata();
@@ -100,8 +100,8 @@ char wybierzOpcjeZMenuUzytkownika()
     cout << "1. Dodaj przychod" << endl;
     cout << "2. Dodaj wydatek" << endl;
     cout << "3. Bilans biezacego miesiaca" << endl;
-    //cout << "4. Wyswietl adresatow" << endl;
-   // cout << "5. Usun adresata" << endl;
+    cout << "4. Bilans poprzedniego miesiaca" << endl;
+    cout << "5. Bilans z wybranego okresu" << endl;
    //cout << "6. Edytuj adresata" << endl;*/
     cout << "---------------------------" << endl;
     cout << "7. Zmien haslo" << endl;

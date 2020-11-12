@@ -40,5 +40,7 @@ class PersonalBudget {
     void addExpense();
     bool isUserLogged();
     void showCurrentMonthBalance();
+    void showLastMonthBalance();
+    void showSelectPeriodBalance();
 };
 #endif
