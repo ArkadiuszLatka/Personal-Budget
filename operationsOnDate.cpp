@@ -9,6 +9,16 @@ int operationsOnDate::getCurrentDate() {
     currentDate = AuxiliaryMethods::tmToInt(now);
     return currentDate;
 }
+int operationsOnDate::getTodaysDate()
+{
+    int date;
+    std::time_t t = std::time(0);
+    std::tm* now = std::localtime(&t);
+    date = (now->tm_year + 1900)*10000+
+            (now->tm_mon + 1)*100+
+            (now->tm_mday);
+    return date;
+}
 int operationsOnDate::getUserDate() {
     int integerUserDate = NULL;
     string stringUserDate = "";
@@ -145,6 +155,115 @@ double operationsOnDate::convertStringValueToDouble(string stringValue) {
             }
     }
     return doubleValue;
+}
+int operationsOnDate::getEndOfMonth()
+{
+    int todaysDate = getTodaysDate();
+    int month =(todaysDate/100)%100;
+    int year = (todaysDate/10000);
+    int days = getNumberOfDaysInMonth(todaysDate);
+    int endOfMonth = year*10000+month*100+days;
+
+    return endOfMonth;
+}
+
+int operationsOnDate::getBeginningOfMonth()
+{
+    int todaysDate = getTodaysDate();
+    int beginningOfMonth = (todaysDate/100)*100+1;
+    return beginningOfMonth;
+}
+
+int operationsOnDate::getEndOfLastMonth()
+{
+    int todaysDate = getTodaysDate();
+    int year = (todaysDate/10000);
+    int month =(todaysDate/100)%100;
+    if(month == 1)
+    {
+        month = 12;
+        year-=1;
+    }
+    else
+        month -= 1;
+
+    int date = year*10000+month*100+1;
+    int days = getNumberOfDaysInMonth(date);
+
+    int endOfMonth = year*10000+month*100+days;
+    return endOfMonth;
+}
+
+int operationsOnDate::getBeginningOfLastMonth()
+{
+    int todaysDate = getTodaysDate();
+    int year = (todaysDate/10000);
+    int month =(todaysDate/100)%100;
+
+    if(month == 1)
+    {
+        month = 12;
+        year-=1;
+    }
+    else
+        month -= 1;
+    cout<<month<<endl;
+    int beginningOfMonth = year*10000+month*100+1;
+
+    return beginningOfMonth;
+}
+
+string operationsOnDate::getMonthName(int date)
+{
+    int month =(date/100)%100;
+    string monthName="";
+    switch (month)
+    {
+        case 1:
+        monthName="styczniu"; break;
+        case 2:
+        monthName="lutym"; break;
+        case 3:
+        monthName="marcu"; break;
+        case 4:
+        monthName="kwietniu"; break;
+        case 5:
+        monthName="maju"; break;
+        case 6:
+        monthName="czerwcu"; break;
+        case 7:
+        monthName="lipcu"; break;
+        case 8:
+        monthName="sierpniu"; break;
+        case 9:
+        monthName="wrzesniu"; break;
+        case 10:
+        monthName="pazdzierniku"; break;
+        case 11:
+        monthName="listopadzie"; break;
+        case 12:
+        monthName="grudniu"; break;
+    }
+    return monthName;
+}
+
+int operationsOnDate::getNumberOfDaysInMonth(int date)
+{
+    int month =(date/100)%100;
+    int year = (date/10000);
+    int days;
+    if(month == 2)
+    {
+        if(((year%4==0)&&(year%100!=0))||(year%400==0))
+            days = 29;
+        else
+            days = 28;
+    }
+    else if((month <=7 && month%2==0) || ((month > 7 && month%2==1)))
+        days = 30;
+    else if((month <=7 && month%2==1) || (month > 7 && month%2==0))
+        days = 31;
+    return days;
 }
 
 

@@ -37,6 +37,7 @@ public:
     void loadIncomeFromFile();
     void addIncome();
     void addExpense();
+    void showCurrentMonthBalance();
 
 
 

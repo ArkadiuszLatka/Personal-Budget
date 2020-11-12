@@ -50,7 +50,7 @@ int main()
                 personalBudget.addExpense();
                 break;
             case '3':
-                //ksiazkaAdresowa.wyszukajAdresatowPoNazwisku();
+                personalBudget.showCurrentMonthBalance();
                 break;
             case '4':
                 //ksiazkaAdresowa.wyswietlWszystkichAdresatow();
@@ -99,7 +99,7 @@ char wybierzOpcjeZMenuUzytkownika()
     cout << "---------------------------" << endl;
     cout << "1. Dodaj przychod" << endl;
     cout << "2. Dodaj wydatek" << endl;
-    //cout << "3. Wyszukaj po nazwisku" << endl;
+    cout << "3. Bilans biezacego miesiaca" << endl;
     //cout << "4. Wyswietl adresatow" << endl;
    // cout << "5. Usun adresata" << endl;
    //cout << "6. Edytuj adresata" << endl;*/

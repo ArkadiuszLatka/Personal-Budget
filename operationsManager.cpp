@@ -3,7 +3,8 @@
 
 using namespace std;
 
-void operationsManager::addIncome() {
+void operationsManager::addIncome()
+{
     char choice;
     Income income;
     string incomeName, amount;
@@ -12,7 +13,7 @@ void operationsManager::addIncome() {
 
     cout<<"DODAJ PRZYCHOD\n\n";
     cout<<"Aby dodac przychod z dnia dzisiejszego wybierz 1. \n"
-    "Aby wpisac date recznie wybierz 2.\n";
+        "Aby wpisac date recznie wybierz 2.\n";
 
     choice = AuxiliaryMethods::loadCharacter();
     if (choice == '1')
@@ -50,13 +51,15 @@ void operationsManager::addIncome() {
 
 }
 
-int operationsManager::getNewTransactionId(vector <Income> incomes) {
+int operationsManager::getNewTransactionId(vector <Income> incomes)
+{
     if (incomes.empty() == true)
         return 1;
     else
         return incomes.back().getIncomeId() + 1;
 }
-void operationsManager::addExpense() {
+void operationsManager::addExpense()
+{
     char choice;
     Income expense;
     string exspenseName,amount;
@@ -64,7 +67,7 @@ void operationsManager::addExpense() {
 
     cout<<"DODAJ WYDATEK\n\n";
     cout<<"Aby dodac wydatek z dnia dzisiejszego wybierz 1. \n"
-    "Aby wpisac date recznie wybierz 2.\n";
+        "Aby wpisac date recznie wybierz 2.\n";
 
     choice = AuxiliaryMethods::loadCharacter();
     if (choice == '1')
@@ -100,4 +103,75 @@ void operationsManager::addExpense() {
     expenseFiles.addExpenseToFile(expense);
 
 
+}
+void operationsManager::showCurrentMonthBalance()
+{
+    int incomesNumber =0;
+    int expenseNumber =0;
+    double incomeSum = 0;
+    double expenseSum = 0;
+    double mouthBalance =0;
+
+
+    int beginningDate = operationsOnDate::getBeginningOfMonth();
+    cout <<beginningDate<<endl;
+    int endingDate = operationsOnDate::getEndOfMonth();
+    cout <<endingDate<<endl;
+    if (!incomes.empty())
+    {
+
+        //sort(incomes.begin(), incomes.end());
+        //incomes.begin(), incomes.end(),greater<Income>();
+        //sort(expenses.begin(), expenses.end());
+
+        cout<<"\nPRZYCHODY W BIEZACYM MIESIACU:\n\n";
+
+
+        for (vector<Income>::iterator itr=incomes.begin(); itr!=incomes.end(); itr++)
+        {
+            if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
+            {
+                cout << endl << "IncomeID:             " << itr ->getIncomeId() << endl;
+                cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
+                cout << "Item:             " <<itr ->getItem() << endl;
+                cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
+                cout << "------------------------" << endl;
+                AuxiliaryMethods::conversionFromDoubleToString(incomeSum +=  itr->getAmount());
+
+            }
+
+        }
+
+        cout<<endl;
+    }
+
+    if (!expenses.empty())
+    {
+
+        cout<<"\nWYDATKI W BIEZACYM MIESIACU:\n\n";
+
+
+        for (vector<Income>::iterator itr=expenses.begin(); itr!=expenses.end(); itr++)
+        {
+            if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
+            {
+                cout << endl << "IncomeID:             " << itr ->getIncomeId() << endl;
+                cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
+                cout << "Item:             " <<itr ->getItem() << endl;
+                cout << "Amount:           " << setprecision(15) << itr ->getAmount() << endl;
+                cout << "------------------------" << endl;
+                AuxiliaryMethods::conversionFromDoubleToString(expenseSum +=  itr->getAmount());
+                expenseNumber++;
+            }
+
+        }
+        cout<<">>>>MIESIECZNY BILANS PRZYCHODOW I WYDATKOW<<<< "<<endl;
+        mouthBalance = incomeSum - expenseSum;
+        cout<<"SUMA PRZYCHODOW   "<<incomeSum<<"  zl"<<endl;
+        cout<<"SUMA WYDATKOW     "<<expenseSum<<"  zl"<<endl;
+        cout<<"BILANS            "<<mouthBalance<<"  zl"<<endl;
+
+
+    }
+    system("pause");
 }

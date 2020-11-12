@@ -14,6 +14,7 @@ class operationsOnDate
 
     static int getCurrentDate();
     static int getUserDate();
+    static getTodaysDate();
     static bool correctSignsInDate(string date);
     static int convertStringDateToInt(string date);
     static string convertIntDateToString(int date);
@@ -21,7 +22,12 @@ class operationsOnDate
     static double getTransactionValue();
     static bool correctSignsInValue(string stringValue);
     static double convertStringValueToDouble(string stringValue);
-
+    static int getEndOfMonth();
+    static int getBeginningOfMonth();
+    static int getEndOfLastMonth();
+    static int getBeginningOfLastMonth();
+    static string getMonthName(int date);
+    static getNumberOfDaysInMonth(int date);
 };
 
 #endif // DATE_H

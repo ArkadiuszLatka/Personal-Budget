@@ -39,5 +39,6 @@ class PersonalBudget {
     void addIncome();
     void addExpense();
     bool isUserLogged();
+    void showCurrentMonthBalance();
 };
 #endif

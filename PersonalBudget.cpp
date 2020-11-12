@@ -51,6 +51,12 @@ void PersonalBudget::addExpense()
         system("pause");
     }
 }
+void PersonalBudget::showCurrentMonthBalance()
+{
+
+        OperationsManager->showCurrentMonthBalance();
+
+}
 
 
 
