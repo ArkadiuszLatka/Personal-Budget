@@ -104,10 +104,18 @@ void operationsManager::addExpense()
 
 
 }
+struct CompareDate
+{
+    bool operator()(Income &first, Income & second)
+    {
+        return first.getDate() < second.getDate();
+    }
+} myObject2;
+
 
 void operationsManager::sortTransactions(vector<Income> &incomes,vector<Income> &expenses) {
-    sort(incomes.begin(), incomes.end());
-    sort(expenses.begin(), expenses.end());
+    sort(incomes.begin(), incomes.end(),myObject2);
+    sort(expenses.begin(), expenses.end(),myObject2);
 }
 void operationsManager::showCurrentMonthBalance()
 {
@@ -116,7 +124,7 @@ void operationsManager::showCurrentMonthBalance()
     double incomeSum = 0;
     double expenseSum = 0;
     double mouthBalance = 0;
-    //sortTransactions(incomes,expenses);
+    sortTransactions(incomes,expenses);
 
     int beginningDate = operationsOnDate::getBeginningOfMonth();
     cout <<AuxiliaryMethods::convertDateToString(beginningDate)<<endl;
@@ -126,9 +134,6 @@ void operationsManager::showCurrentMonthBalance()
     if (!incomes.empty())
     {
 
-        //sort(incomes.begin(), incomes.end());
-        //incomes.begin(), incomes.end(),greater<Income>();
-        //sort(expenses.begin(), expenses.end());
 
         cout<<"\nPRZYCHODY W BIEZACYM MIESIACU:\n\n";
 
@@ -162,7 +167,7 @@ void operationsManager::showCurrentMonthBalance()
         {
             if (((itr->getDate()) >= beginningDate) && (itr->getDate() <= endingDate))
             {
-                 sort(incomes.begin(), incomes.end());
+
                 cout << endl << "IncomeID: " << itr ->getIncomeId() << endl;
                 cout << "Date:             "<< AuxiliaryMethods::convertDateToString(itr ->getDate()) << endl;
                 cout << "Item:             " <<itr ->getItem() << endl;
@@ -191,7 +196,7 @@ void operationsManager::showLastMonthBalance()
     double expenseSum = 0;
     double mouthBalance =0;
 
-
+    sortTransactions(incomes,expenses);
     int beginningDate = operationsOnDate::getBeginningOfLastMonth();
     cout <<AuxiliaryMethods::convertDateToString(beginningDate)<<endl;
     int endingDate = operationsOnDate::getEndOfLastMonth();
@@ -262,7 +267,7 @@ void operationsManager::showSelectPeriodBalance()
     double incomeSum = 0;
     double expenseSum = 0;
     double mouthBalance =0;
-
+    sortTransactions(incomes,expenses);
     cout<<"Podaj okres z jakiego chcesz otrzymac dane."<<endl;
     cout<<"Data rozpoczynajaca okres w formacie rrrr-mm-dd: "<<endl;
     int beginningDate = operationsOnDate::getUserDate();
