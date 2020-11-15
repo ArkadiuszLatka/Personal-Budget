@@ -19,12 +19,15 @@ class IncomeFiles {
 public:
 
     IncomeFiles (string INCOMEFILENAME):incomeFileName(INCOMEFILENAME)
-    { };
+    {  };
 
     vector<Income> loadIncomeFromFile( int loggedInUserId);
     vector<Income> loadExpenseFromFile( int loggedInUserId);
     void addIncomeToFile(Income income);
     void addExpenseToFile (Income income);
+    int getLastIncomeIdFromFile();
+    int getLastExpenseIdFromFile();
+
 
 
 

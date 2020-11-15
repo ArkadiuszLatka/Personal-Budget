@@ -6,6 +6,7 @@ vector<Income> IncomeFiles::loadIncomeFromFile( int loggedInUserId){
 
     vector<Income>incomes;
     CMarkup xml;
+
     xml.Load(incomeFileName);
 
     while (xml.FindElem("INCOME")) {
@@ -32,6 +33,7 @@ vector<Income> IncomeFiles::loadIncomeFromFile( int loggedInUserId){
     }
     return incomes;
 }
+
 vector<Income> IncomeFiles::loadExpenseFromFile( int loggedInUserId){
 
     vector<Income>incomes;
@@ -98,6 +100,46 @@ void IncomeFiles::addExpenseToFile (Income income) {
     xml.OutOfElem();
     xml.Save(incomeFileName);
 }
+int IncomeFiles::getLastIncomeIdFromFile()
+{
+    CMarkup xml;
+    int lastIncomeIdFromFile = 1;
+
+    bool fileExists = xml.Load(incomeFileName);
 
 
+    {
+
+        while (xml.FindElem("INCOME"))
+        {
+            Income income;
+            xml.IntoElem();
+            xml.FindElem("INCOMEID");
+            lastIncomeIdFromFile = atoi(MCD_2PCSZ(xml.GetData())) + 1;
+            xml.OutOfElem();
+        }
+    }
+    return lastIncomeIdFromFile;
+}
+int IncomeFiles::getLastExpenseIdFromFile()
+{
+    CMarkup xml;
+    int lastExpenseIdFromFile = 1;
+
+    bool fileExists = xml.Load(incomeFileName);
+
+
+    {
+
+        while (xml.FindElem("Expense"))
+        {
+            Income income;
+            xml.IntoElem();
+            xml.FindElem("EXPENSEID");
+            lastExpenseIdFromFile = atoi(MCD_2PCSZ(xml.GetData())) + 1;
+            xml.OutOfElem();
+        }
+    }
+    return lastExpenseIdFromFile;
+}
 

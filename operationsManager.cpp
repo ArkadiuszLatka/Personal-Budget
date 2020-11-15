@@ -31,7 +31,7 @@ void operationsManager::addIncome()
     {
         cout<< "Nie ma takiej opcji. Wybierz jeszcze raz.";
     }
-    income.setIncomeId(getNewTransactionId(incomes) );
+    income.setIncomeId(incomeFiles.getLastIncomeIdFromFile() );
 
     income.setUserId(loggedInUserId);
 
@@ -51,13 +51,6 @@ void operationsManager::addIncome()
 
 }
 
-int operationsManager::getNewTransactionId(vector <Income> incomes)
-{
-    if (incomes.empty() == true)
-        return 1;
-    else
-        return incomes.back().getIncomeId() + 1;
-}
 void operationsManager::addExpense()
 {
     char choice;
@@ -85,7 +78,7 @@ void operationsManager::addExpense()
     {
         cout<< "Nie ma takiej opcji. Wybierz jeszcze raz.";
     }
-    expense.setIncomeId(getNewTransactionId(expenses) );
+    expense.setIncomeId(expenseFiles.getLastExpenseIdFromFile() );
 
     expense.setUserId(loggedInUserId);
 

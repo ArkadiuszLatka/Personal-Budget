@@ -24,7 +24,6 @@ class operationsManager {
     IncomeFiles expenseFiles;
     int getCurrentDate();
     int getUserDate();
-    int getNewTransactionId(vector <Income> incomes);
     void sortTransactions(vector<Income> &incomes,vector<Income> &expenses);
 
 
